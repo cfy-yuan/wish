@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.user.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.wish.yuan.logic.user.entity.UserInfo">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="identity_number" jdbcType="VARCHAR" property="identityNumber" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="vip_type" jdbcType="VARCHAR" property="vipType" />
+    <result column="vip_time" jdbcType="TIMESTAMP" property="vipTime" />
+    <result column="vip_upgrade_status" jdbcType="VARCHAR" property="vipUpgradeStatus" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, nickname, identity_number, birthday, avatar, position, vip_type, vip_time,
+    vip_upgrade_status, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.wish.yuan.logic.user.entity.UserInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yuan_user_info
+    where user_id = #{userId,jdbcType=BIGINT} and del_status = #{OK}
+  </select>
+
+  <insert id="insert" parameterType="com.wish.yuan.logic.user.entity.UserInfo">
+    insert into yuan_user_info (id,user_id, nickname, identity_number,
+      birthday, avatar, position, 
+      vip_type, vip_time, vip_upgrade_status, 
+      del_status, update_by, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{identityNumber,jdbcType=VARCHAR},
+      #{birthday,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{vipType,jdbcType=VARCHAR}, #{vipTime,jdbcType=TIMESTAMP}, #{vipUpgradeStatus,jdbcType=VARCHAR}, 
+      #{delStatus,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wish.yuan.logic.user.entity.UserInfo">
+    insert into yuan_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="identityNumber != null">
+        identity_number,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="vipType != null">
+        vip_type,
+      </if>
+      <if test="vipTime != null">
+        vip_time,
+      </if>
+      <if test="vipUpgradeStatus != null">
+        vip_upgrade_status,
+      </if>
+      <if test="delStatus != null">
+        del_status,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null">
+        #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="vipType != null">
+        #{vipType,jdbcType=VARCHAR},
+      </if>
+      <if test="vipTime != null">
+        #{vipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipUpgradeStatus != null">
+        #{vipUpgradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null">
+        #{delStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.user.entity.UserInfo">
+    update yuan_user_info
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null">
+        identity_number = #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="vipType != null">
+        vip_type = #{vipType,jdbcType=VARCHAR},
+      </if>
+      <if test="vipTime != null">
+        vip_time = #{vipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipUpgradeStatus != null">
+        vip_upgrade_status = #{vipUpgradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null">
+        del_status = #{delStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=BIGINT}
+      </if>
+
+      <if test="id != null">
+        and #{id,jdbcType=BIGINT}
+      </if>
+    </where>
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wish.yuan.logic.user.entity.UserInfo">
+    update yuan_user_info
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      identity_number = #{identityNumber,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      vip_type = #{vipType,jdbcType=VARCHAR},
+      vip_time = #{vipTime,jdbcType=TIMESTAMP},
+      vip_upgrade_status = #{vipUpgradeStatus,jdbcType=VARCHAR},
+      del_status = #{delStatus,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    <where>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=BIGINT}
+      </if>
+
+      <if test="id != null">
+        and #{id,jdbcType=BIGINT}
+      </if>
+    </where>
+z  </update>
+</mapper>

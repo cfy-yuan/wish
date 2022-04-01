@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.log.dao.LogMapper">
+    <resultMap id="BaseResultMap" type="com.wish.yuan.logic.log.entity.LogEntity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="log_id" jdbcType="BIGINT" property="logId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="log_type" jdbcType="VARCHAR" property="logType"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_status" jdbcType="VARCHAR" property="delStatus"/>
+        <result column="content_text" jdbcType="LONGVARCHAR" property="contentText"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, log_id, user_id, log_type, create_by, update_by, create_time, update_time, del_status,content_text
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from yuan_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimary" parameterType="com.wish.yuan.logic.log.entity.LogEntity" resultType="com.wish.yuan.logic.log.entity.LogEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from yuan_log
+        <where>
+
+            <if test="logId != null">
+                and log_id = #{logId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="logType != null">
+                and log_type = #{logType}
+            </if>
+            <if test="createBy != null">
+                and create_by = #{createBy}
+            </if>
+            <if test="updateBy != null">
+                and update_by = #{updateBy}
+            </if>
+            <if test="startDate != null and endDate != null">
+                and create_time between #{startDate} and #{endDate}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="delStatus != null">
+                and del_status = #{delStatus}
+            </if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.wish.yuan.logic.log.entity.LogEntity">
+        insert into yuan_log (id, log_id, user_id,
+                                log_type, create_by, update_by,
+                                create_time, update_time, del_status,
+                                content_text)
+        values (#{id,jdbcType=VARCHAR}, #{logId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR},
+                #{logType,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{delStatus,jdbcType=VARCHAR},
+                #{contentText,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wish.yuan.logic.log.entity.LogEntity">
+        insert into yuan_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="logId != null">
+                log_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="logType != null">
+                log_type,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="delStatus != null">
+                del_status,
+            </if>
+            <if test="contentText != null">
+                content_text,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="logId != null">
+                #{logId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="logType != null">
+                #{logType,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delStatus != null">
+                #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="contentText != null">
+                #{contentText,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.log.entity.LogEntity">
+        update yuan_log
+        <set>
+            <if test="logId != null">
+                log_id = #{logId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="logType != null">
+                log_type = #{logType,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delStatus != null">
+                del_status = #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="contentText != null">
+                content_text = #{contentText,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.wish.yuan.logic.log.entity.LogEntity">
+        update yuan_log
+        set log_id      = #{logId,jdbcType=BIGINT},
+            user_id     = #{userId,jdbcType=VARCHAR},
+            log_type    = #{logType,jdbcType=VARCHAR},
+            create_by   = #{createBy,jdbcType=VARCHAR},
+            update_by   = #{updateBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            content_text = #{contentText,jdbcType=LONGVARCHAR},
+            del_status = #{delStatus,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

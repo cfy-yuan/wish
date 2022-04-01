@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.sys.dao.OfficeMapper">
+    <resultMap id="BaseResultMap" type="com.wish.yuan.logic.sys.entity.Office">
+        <id column="office_id" jdbcType="BIGINT" property="officeId" />
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="superior_id" jdbcType="BIGINT" property="superiorId" />
+        <result column="superior_ids" jdbcType="VARCHAR" property="superiorIds" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="icon" jdbcType="VARCHAR" property="icon" />
+        <result column="office_status" jdbcType="VARCHAR" property="officeStatus" />
+        <result column="office_path" jdbcType="VARCHAR" property="officePath" />
+        <result column="office_phone" jdbcType="VARCHAR" property="officePhone" />
+        <result column="office_email" jdbcType="VARCHAR" property="officeEmail" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        office_id
+        , id, superior_id, superior_ids, type, name, code,sort, icon,office_status,office_path, office_phone,
+    office_email
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from yuan_office
+        where office_id = #{officeId,jdbcType=BIGINT}
+    </select>
+    <insert id="insert" parameterType="com.wish.yuan.logic.sys.entity.Office">
+        insert into yuan_office (office_id, id, superior_id,
+                                 superior_ids, type, name,
+                                 code, sort, icon, office_status, office_path, office_phone,
+                                 office_email, del_status, create_by,
+                                 update_by, create_time, update_time)
+        values (#{officeId,jdbcType=BIGINT}, #{id,jdbcType=BIGINT}, #{superiorId,jdbcType=BIGINT},
+                #{superiorIds,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+                #{code,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR},
+                #{officeStatus,jdbcType=VARCHAR},
+                #{officePath,jdbcType=VARCHAR}, #{officePhone,jdbcType=VARCHAR},
+                #{officeEmail,jdbcType=VARCHAR}, #{delStatus,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+                #{updateBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wish.yuan.logic.sys.entity.Office">
+        insert into yuan_office
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="officeId != null">
+                office_id,
+            </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="superiorId != null">
+                superior_id,
+            </if>
+            <if test="superiorIds != null">
+                superior_ids,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="officeStatus != null">
+                office_status,
+            </if>
+            <if test="officePath != null">
+                office_path,
+            </if>
+            <if test="officePhone != null">
+                office_phone,
+            </if>
+            <if test="officeEmail != null">
+                office_email,
+            </if>
+            <if test="delStatus != null">
+                del_status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="officeId != null">
+                #{officeId,jdbcType=BIGINT},
+            </if>
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="superiorId != null">
+                #{superiorId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorIds != null">
+                #{superiorIds,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="officeStatus != null">
+                #{officeStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="officePath != null">
+                #{officePath,jdbcType=VARCHAR},
+            </if>
+            <if test="officePhone != null">
+                #{officePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="officeEmail != null">
+                #{officeEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="delStatus != null">
+                #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.sys.entity.Office">
+        update yuan_office
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="superiorId != null">
+                superior_id = #{superiorId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorIds != null">
+                superior_ids = #{superiorIds,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="officeStatus != null">
+                office_status = #{officeStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="officePath != null">
+                office_path = #{officePath,jdbcType=VARCHAR},
+            </if>
+            <if test="officePhone != null">
+                office_phone = #{officePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="officeEmail != null">
+                office_email = #{officeEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="delStatus != null">
+                del_status = #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where office_id = #{officeId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wish.yuan.logic.sys.entity.Office">
+        update yuan_office
+        set id            = #{id,jdbcType=BIGINT},
+            superior_id   = #{superiorId,jdbcType=BIGINT},
+            superior_ids  = #{superiorIds,jdbcType=VARCHAR},
+            type          = #{type,jdbcType=VARCHAR},
+            name          = #{name,jdbcType=VARCHAR},
+            code          = #{code,jdbcType=VARCHAR},
+            sort          = #{sort,jdbcType=INTEGER},
+            icon          = #{icon,jdbcType=VARCHAR},
+            office_status = #{officeStatus,jdbcType=VARCHAR},
+            office_path   = #{officePath,jdbcType=VARCHAR},
+            office_phone  = #{officePhone,jdbcType=VARCHAR},
+            office_email  = #{officeEmail,jdbcType=VARCHAR},
+            del_status    = #{delStatus,jdbcType=VARCHAR},
+            create_by     = #{createBy,jdbcType=VARCHAR},
+            update_by     = #{updateBy,jdbcType=VARCHAR},
+            create_time   = #{createTime,jdbcType=TIMESTAMP},
+            update_time   = #{updateTime,jdbcType=TIMESTAMP}
+        where office_id = #{officeId,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectOfficeList" parameterType="com.wish.yuan.logic.sys.entity.Office" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from yuan_office
+        <where>
+            <if test="officeId != null">
+                and office_id = #{officeId,jdbcType=BIGINT}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="superiorId != null">
+                and superior_id = #{superiorId}
+            </if>
+            <if test="delStatus != null">
+                and del_status = #{delStatus}
+            </if>
+            <if test="superiorIds != null">
+                and (office_id = #{superiorIds} or superior_ids Like '%' || #{superiorIds} ||'%')
+            </if>
+        </where>
+        order by sort asc
+    </select>
+
+    <select id="selectOfficeTreeList" parameterType="com.wish.common.entity.TreeNode"
+        resultType="com.wish.common.entity.TreeNode">
+        select
+            office_id as id ,
+            superior_id as pId,
+            superior_ids as pIds,
+            name as name,
+            icon as icon
+        from yuan_office
+        <where>
+            and del_status = '0'
+            <if test="">
+                and officeStatus = #{status}
+            </if>
+            <if test="pId != null and pIds != null">
+                and (office_id = #{pId} or superior_ids Like '%' || #{pIds} ||'%')
+            </if>
+        </where>
+        order by sort asc
+    </select>
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.sys.dao.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.wish.yuan.logic.sys.entity.UserRole">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="role_id" jdbcType="BIGINT" property="roleId" />
+        <result column="del_status" jdbcType="VARCHAR" property="delStatus" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id , user_id, role_id, del_status, create_time, create_by, update_by, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.wish.yuan.logic.sys.entity.UserRole" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from yuan_user_role
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            and del_status = #{OK}
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.wish.yuan.logic.sys.entity.UserRole">
+        insert into yuan_user_role (id, user_id, role_id,
+                                    del_status, create_time, create_by,
+                                    update_by, update_time)
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT},
+                #{delStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+                #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wish.yuan.logic.sys.entity.UserRole">
+        insert into yuan_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="delStatus != null">
+                del_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="delStatus != null">
+                #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.sys.entity.UserRole">
+        update yuan_user_role
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="delStatus != null">
+                del_status = #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+        </where>
+    </update>
+
+
+    <select id="selectUserRoleList" resultType="com.wish.yuan.logic.sys.entity.Role" parameterType="com.wish.yuan.logic.sys.entity.UserRole">
+        select
+        yr.role_id as roleId,
+        yr.role_superior_id as roleSuperiorId,
+        yr.role_superior_ids as roleSuperiorIds,
+        yr.role_name as roleName,
+        yr.role_type as roleType
+        from yuan_user_role yur
+        left join yuan_role yr on yr.role_id = yur.role_id
+        <where>
+            <if test="userId != null">
+                and yur.user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            and yur.del_status = #{OK} and yr.del_status = #{OK}
+        </where>
+    </select>
+</mapper>

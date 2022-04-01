@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.sys.dao.NavigationMapper">
+    <sql id="navigation">
+      yn.navigation_id as navigationId,
+      yn.navigation_superior_id as navigationSuperiorId,
+      yn.superior_ids as superiorIds,
+      yn.navigation_title as navigationTitle,
+      yn.navigation_name as navigationName,
+      yn.navigation_img as navigationImg,
+      yn.navigation_path as navigationPath,
+      yn.navigation_sort as navigationSort
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.wish.yuan.logic.sys.entity.Navigation"
+        resultType="com.wish.yuan.logic.sys.entity.Navigation">
+        select
+        <include refid="navigation"></include>
+        from yuan_navigation yn
+        <where>
+            <if test="findIds != null">
+                and yn.superior_ids = #{findIds}
+            </if>
+            and yn.del_status = #{OK}
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.wish.yuan.logic.sys.entity.Navigation">
+        insert into yuan_navigation (id, navigation_id, navigation_superior_id,
+                                     superior_ids, navigation_title, navigation_name,
+                                     navigation_img, navigation_path, navigation_sort,
+                                     del_status, create_time, create_by,
+                                     update_by, update_time)
+        values (#{id,jdbcType=BIGINT}, #{navigationId,jdbcType=BIGINT}, #{navigationSuperiorId,jdbcType=BIGINT},
+                #{superiorIds,jdbcType=VARCHAR}, #{navigationTitle,jdbcType=VARCHAR},
+                #{navigationName,jdbcType=VARCHAR},
+                #{navigationImg,jdbcType=VARCHAR}, #{navigationPath,jdbcType=VARCHAR},
+                #{navigationSort,jdbcType=VARCHAR},
+                #{delStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+                #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wish.yuan.logic.sys.entity.Navigation">
+        insert into yuan_navigation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="navigationId != null">
+                navigation_id,
+            </if>
+            <if test="navigationSuperiorId != null">
+                navigation_superior_id,
+            </if>
+            <if test="superiorIds != null">
+                superior_ids,
+            </if>
+            <if test="navigationTitle != null">
+                navigation_title,
+            </if>
+            <if test="navigationName != null">
+                navigation_name,
+            </if>
+            <if test="navigationImg != null">
+                navigation_img,
+            </if>
+            <if test="navigationPath != null">
+                navigation_path,
+            </if>
+            <if test="navigationSort != null">
+                navigation_sort,
+            </if>
+            <if test="delStatus != null">
+                del_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="navigationId != null">
+                #{navigationId,jdbcType=BIGINT},
+            </if>
+            <if test="navigationSuperiorId != null">
+                #{navigationSuperiorId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorIds != null">
+                #{superiorIds,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationTitle != null">
+                #{navigationTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationName != null">
+                #{navigationName,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationImg != null">
+                #{navigationImg,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationPath != null">
+                #{navigationPath,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationSort != null">
+                #{navigationSort,jdbcType=VARCHAR},
+            </if>
+            <if test="delStatus != null">
+                #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.sys.entity.Navigation">
+        update yuan_navigation
+        <set>
+            <if test="navigationId != null">
+                navigation_id = #{navigationId,jdbcType=BIGINT},
+            </if>
+            <if test="navigationSuperiorId != null">
+                navigation_superior_id = #{navigationSuperiorId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorIds != null">
+                superior_ids = #{superiorIds,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationTitle != null">
+                navigation_title = #{navigationTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationName != null">
+                navigation_name = #{navigationName,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationImg != null">
+                navigation_img = #{navigationImg,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationPath != null">
+                navigation_path = #{navigationPath,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationSort != null">
+                navigation_sort = #{navigationSort,jdbcType=VARCHAR},
+            </if>
+            <if test="delStatus != null">
+                del_status = #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where navigation_id = #{navigationId,jdbcType=BIGINT},
+    </update>
+    <resultMap id="navigationMap" type="com.wish.yuan.logic.sys.entity.Navigation">
+
+        <association property="navigation" javaType="yuan_navigation">
+            <result column="navigation_id" javaType="BIGINT" property="navigationId" ></result>
+            <result column="navigation_superior_id" javaType="BIGINT" property="navigationSuperiorId" ></result>
+            <result column="superior_ids" javaType="VARCHAR" property="superiorIds" ></result>
+            <result column="navigation_title" javaType="VARCHAR" property="navigationTitle" ></result>
+            <result column="navigation_name" javaType="VARCHAR" property="navigationName" ></result>
+            <result column="navigation_img" javaType="VARCHAR" property="navigationImg" ></result>
+            <result column="navigation_path" javaType="VARCHAR" property="navigationPath" ></result>
+            <result column="navigation_sort" javaType="VARCHAR" property="navigationSort" ></result>
+        </association>
+        <collection property="authorityType" javaType="ArrayList" column="navigation_id" ofType="java.lang.String"
+            select="selectAuthorityType"/>
+    </resultMap>
+
+
+    <select id="selectNavigationByRole" parameterType="com.wish.yuan.logic.sys.entity.Navigation" resultType="com.wish.yuan.logic.sys.entity.Navigation">
+        select 
+        <include refid="navigation"></include>
+        from yuan_navigation yn
+        inner join yuan_navigation_role ynr on ynr.navigation_id = yn.navigation_id
+        <where>
+            and yn.del_status = #{OK} and ynr.del_status = #{OK}
+            <if test="findIds != null">
+                and yn.superior_ids = #{findIds}
+            </if>
+            <if test="roleList != null">
+                and ynr.role_id in
+                <trim prefix="(" suffix=")" >
+                    <foreach collection="roleList" item="item" index="index" open="" close="" separator=",">
+                        #{item}
+                    </foreach>
+                </trim>
+            </if>
+        </where>
+    </select>
+    <select id="selectAuthorityType">
+
+    </select>
+
+
+</mapper>

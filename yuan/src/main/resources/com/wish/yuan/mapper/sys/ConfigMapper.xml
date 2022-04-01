@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.sys.dao.ConfigMapper">
+    <resultMap id="BaseResultMap" type="com.wish.yuan.logic.sys.entity.Config">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="config_id" jdbcType="BIGINT" property="configId" />
+        <result column="back_img_path" jdbcType="VARCHAR" property="backImgPath" />
+        <result column="login_img_path" jdbcType="VARCHAR" property="loginImgPath" />
+        <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+        <result column="project_img" jdbcType="VARCHAR" property="projectImg" />
+        <result column="navigation_img" jdbcType="VARCHAR" property="navigationImg" />
+        <result column="is_language" jdbcType="VARCHAR" property="isLanguage" />
+        <result column="is_register" jdbcType="VARCHAR" property="isRegister" />
+        <result column="is_qq" jdbcType="VARCHAR" property="isQq" />
+        <result column="is_wx" jdbcType="VARCHAR" property="isWx" />
+        <result column="is_subscript" jdbcType="VARCHAR" property="isSubscript" />
+        <result column="project" jdbcType="VARCHAR" property="project" />
+        <result column="del_status" jdbcType="VARCHAR" property="delStatus" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        , config_id, back_img_path, project_name,project_img,navigation_img ,login_img_path,is_language, is_register, is_qq, is_wx, is_subscript,
+    project, del_status, create_by, create_time, update_by, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from yuan_config
+        <where>
+            <if test="project != null and project !=''">
+                project = #{project,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+    <insert id="insert" parameterType="com.wish.yuan.logic.sys.entity.Config">
+        insert into yuan_config (id, config_id, back_img_path,
+                                 login_img_path, project_name, project_img, navigation_img,is_language, is_register, is_qq,
+                                 is_wx, is_subscript, project,
+                                 del_status, create_by, create_time,
+                                 update_by, update_time)
+        values (#{id,jdbcType=BIGINT}, #{configId,jdbcType=BIGINT}, #{backImgPath,jdbcType=VARCHAR},
+                #{loginImgPath,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{projectImg,jdbcType=VARCHAR},
+                #{navigationImg,jdbcType=VARCHAR}, #{isLanguage,jdbcType=VARCHAR},#{isRegister,jdbcType=VARCHAR}, #{isQq,jdbcType=VARCHAR},
+                #{isWx,jdbcType=VARCHAR}, #{isSubscript,jdbcType=VARCHAR}, #{project,jdbcType=VARCHAR},
+                #{delStatus,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wish.yuan.logic.sys.entity.Config">
+        insert into yuan_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="configId != null">
+                config_id,
+            </if>
+            <if test="backImgPath != null">
+                back_img_path,
+            </if>
+            <if test="loginImgPath != null">
+                login_img_path,
+            </if>
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="projectImg != null">
+                project_img,
+            </if>
+            <if test="navigationImg != null">
+                navigation_img,
+            </if>
+            <if test="isLanguage != null">
+                is_language,
+            </if>
+            <if test="isRegister != null">
+                is_register,
+            </if>
+            <if test="isQq != null">
+                is_qq,
+            </if>
+            <if test="isWx != null">
+                is_wx,
+            </if>
+            <if test="isSubscript != null">
+                is_subscript,
+            </if>
+            <if test="project != null">
+                project,
+            </if>
+            <if test="delStatus != null">
+                del_status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="configId != null">
+                #{configId,jdbcType=BIGINT},
+            </if>
+            <if test="backImgPath != null">
+                #{backImgPath,jdbcType=VARCHAR},
+            </if>
+            <if test="loginImgPath != null">
+                #{loginImgPath,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectImg != null">
+                #{projectImg,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationImg != null">
+                #{navigationImg,jdbcType=VARCHAR},
+            </if>
+            <if test="isLanguage != null">
+                #{isLanguage,jdbcType=VARCHAR},
+            </if>
+            <if test="isRegister != null">
+                #{isRegister,jdbcType=VARCHAR},
+            </if>
+            <if test="isQq != null">
+                #{isQq,jdbcType=VARCHAR},
+            </if>
+            <if test="isWx != null">
+                #{isWx,jdbcType=VARCHAR},
+            </if>
+            <if test="isSubscript != null">
+                #{isSubscript,jdbcType=VARCHAR},
+            </if>
+            <if test="project != null">
+                #{project,jdbcType=VARCHAR},
+            </if>
+            <if test="delStatus != null">
+                #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.sys.entity.Config">
+        update yuan_config
+        <set>
+
+            <if test="backImgPath != null">
+                back_img_path = #{backImgPath,jdbcType=VARCHAR},
+            </if>
+            <if test="loginImgPath != null">
+                login_img_path = #{loginImgPath,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                project_name = #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectImg != null">
+                project_img = #{projectImg,jdbcType=VARCHAR},
+            </if>
+            <if test="navigationImg != null">
+                navigation_img = #{navigationImg,jdbcType=VARCHAR},
+            </if>
+            <if test="isLanguage != null">
+                is_language = #{isLanguage,jdbcType=VARCHAR},
+            </if>
+            <if test="isRegister != null">
+                is_register = #{isRegister,jdbcType=VARCHAR},
+            </if>
+            <if test="isQq != null">
+                is_qq = #{isQq,jdbcType=VARCHAR},
+            </if>
+            <if test="isWx != null">
+                is_wx = #{isWx,jdbcType=VARCHAR},
+            </if>
+            <if test="isSubscript != null">
+                is_subscript = #{isSubscript,jdbcType=VARCHAR},
+            </if>
+            <if test="project != null">
+                project = #{project,jdbcType=VARCHAR},
+            </if>
+            <if test="delStatus != null">
+                del_status = #{delStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="configId != null">
+                and config_id = #{configId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </update>
+
+</mapper>

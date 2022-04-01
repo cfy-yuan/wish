@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.yuan.logic.user.dao.UserLoginMapper">
+  <resultMap id="BaseResultMap" type="com.wish.yuan.logic.user.entity.UserLogin">
+    <result column="wish_id" jdbcType="VARCHAR" property="wishId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mailbox" jdbcType="VARCHAR" property="mailbox" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="wx_id" jdbcType="VARCHAR" property="wxId" />
+    <result column="qq_id" jdbcType="VARCHAR" property="qqId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+    <result column="del_status" jdbcType="VARCHAR" property="delStatus" />
+    <result column="create_type" jdbcType="VARCHAR" property="createType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    wish_id, user_id, login_name, phone, mailbox, qq_id,wx_id,password, uuid, create_time, create_by,
+    update_time, update_by,user_status, del_status, create_type
+  </sql>
+  <sql id="userLogin">
+    user_id, login_name, phone, mailbox, password, uuid,qq_id as qqId , wx_id as wxId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yuan_user_login
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="userLogin" parameterType="com.wish.yuan.logic.user.entity.UserLogin" resultMap="BaseResultMap">
+    select
+    <include refid="userLogin" />
+    from yuan_user_login
+    <where>
+      <if test="userStatus != null">
+        and user_status = #{userStatus}
+      </if>
+      <if test="delStatus != null">
+        and del_status = #{delStatus}
+      </if>
+      <if test="loginName != null">
+        and login_name = #{loginName}
+      </if>
+      <if test="phone != null">
+        and  phone = #{phone}
+      </if>
+      <if test="mailbox != null">
+        and mailbox = #{mailbox}
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.wish.yuan.logic.user.entity.UserLogin">
+    insert into yuan_user_login (wish_id, user_id, login_name,
+      phone, mailbox, wx_id, qq_id,password,
+      uuid, create_time, create_by, 
+      update_time, update_by, user_status,del_status,
+      create_type)
+    values (#{wishId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{mailbox,jdbcType=VARCHAR}, #{wxId,jdbcType=VARCHAR},
+            #{qqId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+            #{uuid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR},#{delStatus,jdbcType=VARCHAR},
+      #{createType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wish.yuan.logic.user.entity.UserLogin">
+    insert into yuan_user_login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wish_id != null">
+        wish_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mailbox != null">
+        mailbox,
+      </if>
+      <if test="wxId != null">
+        wx_id,
+      </if>
+      <if test="qqId != null">
+        qq_id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="delStatus != null">
+        del_status,
+      </if>
+      <if test="createType != null">
+        create_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wishId != null">
+        #{wishId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mailbox != null">
+        #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="wxId != null">
+        #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="qqId != null">
+        #{qqId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null">
+        #{delStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        #{createType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wish.yuan.logic.user.entity.UserLogin">
+    update yuan_user_login
+    <set>
+
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mailbox != null">
+        mailbox = #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="wxId != null">
+        wx_id = #{wxId,jdbcType=VARCHAR},
+      </if>
+      <if test="qqId != null">
+        qq_id = #{qqId,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="delStatus != null">
+        del_status = #{delStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null">
+        create_type = #{createType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <where>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </where>
+  </update>
+
+</mapper>
